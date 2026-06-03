@@ -1,0 +1,11 @@
+target_id,uniprot_id,gene_symbol,name,target_class,therapeutic_area,druggability_tier
+EGFR,P00533,EGFR,Epidermal growth factor receptor,Receptor tyrosine kinase,oncology,tier1
+KRAS,P01116,KRAS,GTPase KRas,GTPase,oncology,tier1
+BRAF,P15056,BRAF,Serine/threonine-protein kinase B-raf,Kinase,oncology,tier1
+BRD4,O60885,BRD4,Bromodomain-containing protein 4,Epigenetic reader,oncology,tier2
+ERBB2,P04626,ERBB2,Receptor tyrosine-protein kinase erbB-2,Receptor tyrosine kinase,oncology,tier1
+PDCD1,Q15116,PDCD1,Programmed cell death protein 1,Immune checkpoint,oncology,tier1
+CDK4,P11802,CDK4,Cyclin-dependent kinase 4,Kinase,oncology,tier1
+ABL1,P00519,ABL1,Tyrosine-protein kinase ABL1,Kinase,oncology,tier1
+PARP1,P09874,PARP1,Poly [ADP-ribose] polymerase 1,DNA repair,oncology,tier1
+ALK,Q9UM73,ALK,ALK tyrosine kinase receptor,Receptor tyrosine kinase,oncology,tier1

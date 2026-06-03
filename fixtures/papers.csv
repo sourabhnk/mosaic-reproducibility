@@ -1,0 +1,31 @@
+id,pmid,title,journal,publication_date,doi
+PMID:14570950,14570950,Activating mutations in the epidermal growth factor receptor underlying responsiveness of non-small-cell lung cancer to gefitinib,N Engl J Med,2004-05-20,10.1056/NEJMoa040938
+PMID:15118073,15118073,EGFR mutations in lung cancer: correlation with clinical response to gefitinib therapy,Science,2004-06-04,10.1126/science.1099314
+PMID:24818796,24818796,AZD9291 in EGFR inhibitor-resistant non-small-cell lung cancer,N Engl J Med,2015-04-30,10.1056/NEJMoa1411817
+PMID:34160651,34160651,Sotorasib for lung cancers with KRAS p.G12C mutation,N Engl J Med,2021-06-24,10.1056/NEJMoa2103695
+PMID:33196936,33196936,The clinical KRAS(G12C) inhibitor AMG 510 drives anti-tumour immunity,Nature,2019-11-30,10.1038/s41586-019-1694-1
+PMID:34161704,34161704,Adagrasib in non-small-cell lung cancer harboring a KRAS G12C mutation,N Engl J Med,2022-06-16,10.1056/NEJMoa2204619
+PMID:21639808,21639808,Improved survival with vemurafenib in melanoma with BRAF V600E mutation,N Engl J Med,2011-06-30,10.1056/NEJMoa1103782
+PMID:22356324,22356324,Combined BRAF and MEK inhibition in melanoma with BRAF V600 mutations,N Engl J Med,2012-11-01,10.1056/NEJMoa1210093
+PMID:28991513,28991513,Encorafenib plus binimetinib in metastatic melanoma,Lancet Oncol,2018-05-01,10.1016/S1470-2045(18)30142-6
+PMID:20871596,20871596,Selective inhibition of BET bromodomains,Nature,2010-12-23,10.1038/nature09504
+PMID:25131000,25131000,DOT1L and BET bromodomain inhibitors in acute leukemia,Blood,2014-10-09,10.1182/blood-2014-04-571372
+PMID:25999370,25999370,Phthalimide conjugation as a strategy for in vivo target protein degradation,Science,2015-06-12,10.1126/science.aab1433
+PMID:11248153,11248153,Use of chemotherapy plus a monoclonal antibody against HER2 for metastatic breast cancer,N Engl J Med,2001-03-15,10.1056/NEJM200103153441101
+PMID:16606972,16606972,Trastuzumab after adjuvant chemotherapy in HER2-positive breast cancer,N Engl J Med,2005-10-20,10.1056/NEJMoa052306
+PMID:30516102,30516102,Trastuzumab deruxtecan in previously treated HER2-positive breast cancer,N Engl J Med,2020-02-13,10.1056/NEJMoa1914510
+PMID:22658128,22658128,Safety, activity, and immune correlates of anti-PD-1 antibody in cancer,N Engl J Med,2012-06-28,10.1056/NEJMoa1200690
+PMID:25891173,25891173,Pembrolizumab versus ipilimumab in advanced melanoma,N Engl J Med,2015-06-25,10.1056/NEJMoa1503093
+PMID:26412456,26412456,Nivolumab versus everolimus in advanced renal-cell carcinoma,N Engl J Med,2015-11-05,10.1056/NEJMoa1510665
+PMID:25415276,25415276,The cyclin-dependent kinase 4/6 inhibitor palbociclib in combination with letrozole in advanced breast cancer,Lancet Oncol,2015-01-01,10.1016/S1470-2045(14)71159-3
+PMID:27959613,27959613,Ribociclib as first-line therapy for HR-positive, advanced breast cancer,N Engl J Med,2016-11-03,10.1056/NEJMoa1609709
+PMID:32101663,32101663,Triplet therapy, transplantation, and maintenance until progression in myeloma,N Engl J Med,2020-09-10,10.1056/NEJMoa1804710
+PMID:11423618,11423618,Efficacy and safety of imatinib mesylate in advanced gastrointestinal stromal tumors,N Engl J Med,2001-04-05,10.1056/NEJM200104053441401
+PMID:17151359,17151359,Dasatinib in imatinib-resistant Philadelphia chromosome-positive leukemias,N Engl J Med,2006-06-15,10.1056/NEJMoa055229
+PMID:20525995,20525995,Nilotinib versus imatinib for newly diagnosed chronic myeloid leukemia,N Engl J Med,2010-06-17,10.1056/NEJMoa1002315
+PMID:19553641,19553641,Inhibition of poly(ADP-ribose) polymerase in tumors from BRCA mutation carriers,N Engl J Med,2009-07-09,10.1056/NEJMoa0900212
+PMID:24882434,24882434,Olaparib monotherapy in patients with advanced cancer and a germline BRCA1/2 mutation,J Clin Oncol,2015-01-20,10.1200/JCO.2014.56.2728
+PMID:27717299,27717299,Niraparib maintenance therapy in platinum-sensitive recurrent ovarian cancer,N Engl J Med,2016-12-01,10.1056/NEJMoa1611310
+PMID:23724913,23724913,Crizotinib versus chemotherapy in advanced ALK-positive lung cancer,N Engl J Med,2013-06-20,10.1056/NEJMoa1214886
+PMID:28586279,28586279,Alectinib versus crizotinib in untreated ALK-positive non-small-cell lung cancer,N Engl J Med,2017-08-31,10.1056/NEJMoa1704795
+PMID:33872585,33872585,Lorlatinib in advanced ALK-positive non-small-cell lung cancer,N Engl J Med,2020-11-19,10.1056/NEJMoa2027187

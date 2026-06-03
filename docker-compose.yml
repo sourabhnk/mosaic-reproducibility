@@ -1,0 +1,57 @@
+# Mosaic reproducibility pipeline
+#
+# Spins up:
+#   postgres : Postgres 16 + pgvector. AGE extension is created by the
+#              init scripts in init-scripts/.
+#   repro    : the slim Mosaic Python container, runs scripts/run_repro.py
+#              once and exits. Applies the schema, loads fixtures,
+#              refreshes kg_metadata, emits representative tool outputs
+#              to ./output/.
+#
+# Quickstart (from this directory):
+#   docker compose up --build
+# After it exits successfully you'll find:
+#   ./output/MANIFEST.md                              row counts + index
+#   ./output/mosaic_kg_stats.json                     scope on the mini-KG
+#   ./output/mosaic_get_target_profile_EGFR.json      canonical dossier
+#   ./output/mosaic_modality_gaps_BRD4.json           modality matrix
+#   ./output/mosaic_polypharmacology_imatinib.json    polypharm profile
+#   ./output/mosaic_find_similar_targets_BRAF.json    Foldseek tool output
+#                                                     (empty + hint — the
+#                                                      fixture intentionally
+#                                                      doesn't ship a
+#                                                      Foldseek index)
+#
+# Reset (drop volume + rebuild):
+#   docker compose down -v && docker compose up --build
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: mosaic_user
+      POSTGRES_PASSWORD: mosaic_dev_password
+      POSTGRES_DB: mosaic_db
+    volumes:
+      - mosaic_pg:/var/lib/postgresql
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mosaic_user -d mosaic_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  repro:
+    build:
+      context: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://mosaic_user:mosaic_dev_password@postgres:5432/mosaic_db"
+      ENVIRONMENT: reproducibility
+    volumes:
+      - ./output:/output
+
+volumes:
+  mosaic_pg:
