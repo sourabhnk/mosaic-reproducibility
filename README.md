@@ -1,5 +1,8 @@
 # Mosaic reproducibility package
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Companion data archive](https://img.shields.io/badge/Data%20archive-10.5281%2Fzenodo.20529685-blue)](https://doi.org/10.5281/zenodo.20529685)
+
 This repository is the public reproducibility surface for the Mosaic
 preprint:
 
@@ -117,8 +120,10 @@ backfill, etc.) — those require substantial compute and are not
 bundled.
 
 **Full-data reproducibility** of the production knowledge graph is
-enabled separately, through the public data archive cited in §9 of
-the paper. A reader can either:
+enabled separately, through the public data archive at
+<https://github.com/sourabhnk/mosaic-data> (Zenodo DOI
+[10.5281/zenodo.20529685](https://doi.org/10.5281/zenodo.20529685)
+for the paper-v1 snapshot). A reader can either:
 
 1. Download the versioned production dumps and load them into a
    local Postgres + AGE instance, then re-run the case studies, or
