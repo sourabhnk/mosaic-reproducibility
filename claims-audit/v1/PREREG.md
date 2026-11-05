@@ -1,6 +1,15 @@
 # Claims audit, v1: time-anchored, Q4 2024. Pre-registration
 
-> **REGISTERED 2026-11-04.** The commit that adds this file is the registration. The operator approved its content on 2026-11-04 (§10).
+> **REGISTERED 2026-11-05 (amendment 1).** The commit that makes this version of the file is the registration. It supersedes the registration of 2026-11-04 (commit `27b04160`, sha256 `f230f6d45682197ed241c1782921593f4290864b27e8ff85f6f96a62db78ac45`).
+>
+> **Why it was superseded:** that registration's Source A query could not run on either site (§2, D10). Only these parts changed:
+> - Source A;
+> - two new paragraphs in §2, on screening and on Source B's mechanics;
+> - §10's D10;
+> - one risk in §11;
+> - this banner.
+>
+> Every other rule and every pinned input in §9 is unchanged. The operator approved the content on 2026-11-04, and amendment 1 on 2026-11-05 (§10).
 >
 > What was frozen before it:
 > - the verdict engine (PR #84);
@@ -9,7 +18,7 @@
 >
 > §9 pins their sha256.
 >
-> **No document in the window was opened before this commit.** The extractor and the run were developed on a release dated 2026.
+> **No document in the window was opened before this commit.** The extractor and the run were developed on a release dated 2026. Amendment 1's filters were tested on listing pages outside the window, and only those pages' dates were read.
 >
 > `PUBLIC_TIMESTAMP.md` records three things, as in `../../judge-fabrication/v2/`:
 > - this commit;
@@ -28,7 +37,13 @@ This is the source of the plan's new headline (§3.3a): **the share of absence o
 
 **Window:** publication dates 2024-10-01 to 2024-12-31 inclusive, US Eastern time.
 
-**Source A: deal announcements.** Press releases on **GlobeNewswire** and **Business Wire** found by each site's own search, filtered to the window, with the query `(license OR licensing OR collaboration OR acquire OR acquisition OR merger OR option) AND (oncology OR cancer OR tumor OR tumour)`.
+**Source A: deal announcements.** Press releases are listed by each site's own subject and industry filters, read newest first back to before the window (amendment 1, D10):
+- **GlobeNewswire** (the globenewswire.com search): Industry **Biotechnology**, and separately **Pharmaceuticals**, each with Subject **Licensing Agreements**, **Mergers and Acquisitions**, **Partnerships**, **Business Contracts** and **Joint Venture**, one subject at a time. That is 10 listings.
+- **Business Wire** (the businesswire.com newsroom): Industry **Health › Oncology**, with Subject **Merger/Acquisition**, and separately **Contract/Agreements**. That is 2 listings.
+
+Neither site filters by date. So each listing is paged newest first until it passes releases dated before 2024-10-01. Every release dated in the window (US Eastern) is a candidate. The candidates are the union of the listings, by URL. `SELECTION.md` records the URL of every listing page read.
+
+The registered query, `(license OR licensing OR collaboration OR acquire OR acquisition OR merger OR option) AND (oncology OR cancer OR tumor OR tumour)`, cannot run on either site. GlobeNewswire's search box takes at most 35 characters and has no boolean syntax; passed in the URL, the full query returns 3 releases, all outside the window. Business Wire's keyword filter reads it as one phrase and returns none.
 
 A release is in if all four hold:
 1. it announces a new licensing, collaboration-with-licence, option-to-licence, acquisition or merger agreement;
@@ -40,13 +55,25 @@ A release is out if it amends or extends an existing deal, reports a financing r
 
 One document per deal: the earliest release; if two releases share a timestamp, the licensor's (or the acquired company's).
 
+**Screening** (amendment 1). Each candidate's text is read and screened against criteria 1–4 and the exclusions by Claude, in a recorded session. For each criterion, `screening.json` records:
+- the decision;
+- the verbatim passage that decides it: the stated value, the words that make the deal new, the cancer indication.
+
+Another currency is converted to US$ at the release date's rate, and the rate and its source are recorded. Before `SELECTION.md` is committed, the operator reviews every included document, and every exclusion on criterion 1 (deal type) or criterion 3 (value). A change made in review is logged with its reason.
+
 **Source B: IPO prospectuses.** The *Competition* subsection of the Business section of every original **S-1** or **F-1** (not amendments) filed on SEC EDGAR in the window by an issuer with SIC 2834 or 2836 whose prospectus summary names cancer as the lead programme's indication. If none qualifies, Source B contributes zero, and the report says so.
+
+**Source B mechanics** (amendment 1; the rule is unchanged):
+- **Which filings:** form type exactly `S-1` or `F-1` in EDGAR's quarterly index (`full-index/2024/QTR4/form.idx`), with a filing date in the window.
+- **The issuer's SIC:** read from its EDGAR company record (`data.sec.gov/submissions`).
+- **The Competition subsection:** the text from its heading, inside the Business section, to the next heading of the same level.
+- **SEC requests** identify themselves as `Mosaic claims audit support@getmosaic.dev`, as SEC's fair-access policy requires.
 
 **Size:** every qualifying document is listed in `SELECTION.md`, with URL, date, the reason it qualifies, its retrieval and sha256. If more than **60** qualify, a seeded random draw of 60 (seed `claims-audit-v1`, stratified by source in proportion) is audited, and the full list is reported.
 
 **The order of work** (each step is a gate in `mosaic/audit/run.py`, which refuses to run a step before the one ahead of it):
 1. Register (this file, then `PUBLIC_TIMESTAMP.md`).
-2. Run the selection: documents are screened against the rule, which needs their text.
+2. Run the selection: documents are screened against the rule, which needs their text (`screening.json`, reviewed by the operator).
 3. Commit `SELECTION.md` and `selection.json` before any claim is extracted. `selection.json` lists each document's id, source, URL, as-of date, text file and sha256. It also lists, as `chembl_release_sha256`, the sha256 of each ChEMBL release file the run will read. The run refuses a selection committed in, or before, the registration commit.
 4. Extract: one recorded model call per document (`audit.run extract`). Commit the recordings (`extractions/<id>.cassette.json`).
 5. Review the spans, blind to any Mosaic result, and commit `review/<id>.json` for every document (§4). Each review names the sha256 of the recording it was made on.
@@ -257,7 +284,7 @@ The output of `python -m audit.run frozen` at `main` = `d5518148` (PR #86 merged
 
 ## 10 · Operator decisions
 
-**Decided 2026-11-04 (operator): every recommendation below.** D2 is "compare as a lower bound", built into `verdicts.py` in PR #84 (`meets_lower_bound`; `blockers.md` B-P3-3). D5's predictions go in as drafted. D8, the extractor's rules, and D9, the run's rules, were approved later the same day, each after its review.
+**Decided 2026-11-04 (operator): every recommendation below.** D2 is "compare as a lower bound", built into `verdicts.py` in PR #84 (`meets_lower_bound`; `blockers.md` B-P3-3). D5's predictions go in as drafted. D8, the extractor's rules, and D9, the run's rules, were approved later the same day, each after its review. D10, amendment 1, was approved on 2026-11-05.
 
 | # | decision | decided |
 |---|---|---|
@@ -270,6 +297,7 @@ The output of `python -m audit.run frozen` at `main` = `d5518148` (PR #86 merged
 | D7 | where to publish the timestamp: `sourabhnk/mosaic-reproducibility`, as in Phase 1 | as written |
 | D8 | the extractor's four rules (`blockers.md` B-P3-4): a hedged or qualified lack of therapy is class E; a claim's limits travel in its unit; a compounds claim states its stage; a modality-scoped A or B claim is out of scope and out of the headline | **approved as written, 2026-11-04** |
 | D9 | the run's nine rules (`blockers.md` B-P3-5): ChEMBL release dates and identity; trials never confirm or contradict; ChEMBL zeros confirm only at approved; clinical = max_phase ≥ 0.5; papers and patents carry their own limits; no dated assignee count; one target per comparison; the review pinned and locked; the order of work enforced | **approved as written, 2026-11-04** |
+| D10 | **Amendment 1.** Source A is listed by each site's own subject and industry filters, read back to the window, because the registered query cannot run on either site (§2). Added with it: the recorded screening, reviewed by the operator, and Source B's mechanics, with SEC requests identified as `Mosaic claims audit support@getmosaic.dev` | **approved, 2026-11-05** |
 
 ## 11 · What would make this result wrong, stated in advance
 
@@ -279,4 +307,5 @@ The output of `python -m audit.run frozen` at `main` = `d5518148` (PR #86 merged
 - **Reconstruction is partial:** see §3's right-hand column.
 - **Few comparisons can confirm.** A trials zero, and a ChEMBL zero below the approved stage, read unavailable (§3, §4). Papers and patents rarely match a claim's scope. Most comparable claims are on compounds. A `confirmed` on approved molecules rests on ChEMBL's curation of approved drugs.
 - **The timestamp's URL is recorded, not fetched by the run.** `PUBLIC_TIMESTAMP.md` is committed, and the run checks it against the registration commit. That the URL serves the same bytes is checked by hand.
+- **Source A depends on the issuers' own tags** (amendment 1). A deal tagged only "Company Announcement" on GlobeNewswire, or not tagged Oncology on Business Wire, is not found. GlobeNewswire has no oncology industry, so its cancer criterion is screened from the text. The selection describes deals their issuers filed under these subjects, not every oncology deal of the quarter.
 - **One quarter, one field, two sources.** The result describes Q4 2024 oncology deals above $100M and IPO prospectuses, not biotech claims in general.
