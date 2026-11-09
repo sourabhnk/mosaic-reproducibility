@@ -1,6 +1,21 @@
 # Claims audit, v1.1: the widened first run. Pre-registration
 
-**Status:** written 2026-11-07, not yet registered. It is registered when this file is committed, published in `sourabhnk/mosaic-reproducibility` and timestamped, and `PUBLIC_TIMESTAMP.md` records the sha256, commit and URL (as for v1). No document dated in the window has been opened.
+> **REGISTERED 2026-11-09 (amendment 1).** The commit that makes this version of the file is the registration, once it is published and timestamped and `PUBLIC_TIMESTAMP.md` records it. It supersedes the registration of 2026-11-08: commit `c5a1e916`, sha256 `9dd5338a2dc7688df1edc1d6364e1981cf5896b34f49ca932dae6c60bc17f8d1`, published at `sourabhnk/mosaic-reproducibility` `b63e8f30`.
+>
+> **When it was made:** at the operator's selection review (§2, step 2), before any claim was extracted from a 2025 filing and before any Mosaic fetch. By then two things had been read:
+> - each screened filing's prospectus summary, by the recorded screen;
+> - parts of the Competition text of the five issuers' filings that `selection/competition_fallback.py` found, to check that it took the right section. Shuttle's whole subsection, 74 characters, is quoted in `SELECTION_REVIEW.md`.
+>
+> §8 says nothing in §2 to §6 changes after the first 2025 document is opened. The screen opens the summaries by design. These changes add rules for cases not yet decided, and change no rule already applied. So the operator made them here, recorded with what had been read.
+>
+> **What changed (the operator, 2026-11-09):**
+> 1. **§6, a filing with no claim.** A filing whose Competition subsection yields no claim is excluded, and is in neither the headline's filing count nor its bootstrap. A filing with claims but no class B claim adds no cluster to the primary.
+> 2. **§6, the pool counts each issuer once.** Three of v1's issuers (OS Therapies, Silexion, CERO) filed again in 2025 with Competition text identical to v1's. The selection review dropped the 2025 filings. These issuers enter the four-quarter pool once, from v1, and v1's claims from them are counted.
+> 3. **§6, the headline sentence names its population.**
+> 4. **§8, a low yield.** If the Q1 to Q3 2025 filings yield fewer than 30 class B claims, Q4 2025 is added by the same rules before anything is published. v2's confirmatory window moves to Q1 2026 (v2 amendment 2), so Q4 2025 can serve here.
+> 5. **§11:** one more risk, the fallback extractor.
+>
+> Every other rule, and every pinned input in §9, is unchanged. No code changed, so §9's block is the same.
 
 **Why v1.1 exists.** v1's first run (`docs/audits/claims_audit_2024Q4.md`, Finding 1) had 15 competitive claims from 5 filings, one holding 7. That gives a direction, not a rate (operator, 2026-11-07, `docs/audits/blockers.md` B-P3-11). v1.1 widens the run to four quarters, Q4 2024 (v1) plus Q1 to Q3 2025, so the rate can be estimated and quoted. It selects prospectus competition sections only: in v1, every competitive claim came from one, and the 8 deal releases made none.
 
@@ -78,6 +93,27 @@ The four-quarter pool (v1's restated rows plus v1.1's) is reported beside the pr
 - a document that yields no auditable claims is excluded, with the reason;
 - a source unavailable for the date is `cannot_verify_unavailable`, never dropped from the denominator.
 
+**A filing with no claim (amendment 1):**
+- a filing whose Competition subsection yields no claim is excluded with the reason `run.py` records, `no auditable target claims`;
+- it is in neither the headline's filing count nor its bootstrap clusters;
+- a filing with claims but no class B claim adds no cluster to the primary.
+
+This is what `run.py` (`adjudicate_all`) and its `bootstrap` already do. It is written here, before any claim is read, so that no exclusion can be post hoc.
+
+**The pool counts each issuer once (amendment 1).**
+- Three of v1's issuers filed again in 2025 with Competition text identical to v1's documents: OS Therapies, Silexion and CERO. The selection review dropped the 2025 filings (`SELECTION.md`, decision 1).
+- These issuers enter the four-quarter pool once, from v1, and v1's claims from them are counted. They are not removed as already read.
+- `audit/pool_v1_1.py` builds the pool, and refuses an issuer that is in both samples. Its test checks the three.
+
+**The headline sentence names its population (amendment 1).** It states:
+- the number of filings with a class B claim, the forms (S-1, F-1) and the window;
+- how many are initial public offerings, and how many are follow-on or resale registrations: the screen's `initial_public_offering`, recorded per filing;
+- how many issuers mark themselves a *smaller reporting company* on the filing's cover page. This is the SEC's Rule 12b-2 category: in general, a public float under $250 million.
+  - An F-1's cover has no such box, so an F-1 counts as "not stated".
+  - A box that cannot be read mechanically counts as "not read", never as either answer.
+
+The report also says what the population is not: large-cap 10-K competition sections, or licensing-deal 8-Ks. These are where business-development teams read competitive claims, and the report names them as the population a later version should add.
+
 ## 7 · Predictions, stated before any document is opened
 
 | # | prediction |
@@ -93,7 +129,13 @@ A prediction is met when the point estimate falls on its side. Not met is report
 ## 8 · Stopping rule
 
 - **One registered run.** After the first 2025 document is opened, nothing in §2 to §6 changes. A change is a v1.2 with its own pre-registration.
-- **Fewer than 30 class B claims:** the run is reported as underpowered, with its n and interval, and no rate is quoted from it. No quarter is added to reach a number without a new registration.
+- **Fewer than 30 class B claims, as registered on 2026-11-08:** the run is reported as underpowered, with its n and interval, and no rate is quoted from it. No quarter is added to reach a number without a new registration.
+- **Fewer than 30 class B claims, as amended (amendment 1):** the count is taken from the Q1 to Q3 2025 filings' reviewed extractions (§2 step 5), before any fetch, so it is blind to every verdict.
+  - Under 30, Q4 2025 is added: 2025-10-01 to 2025-12-31, from `full-index/2025/QTR4`, by the same rules and the same review steps (§2 to §4). The headline is then over the Q1 to Q4 2025 filings.
+  - The window constant in `audit/run_v1_1.py`, and §9, change in a commit that changes nothing else, before Q4's selection. This file is then registered again.
+  - Q4's filings go through the same operator review of the selection and of the spans.
+  - If Q1 to Q4 still yield fewer than 30, the run is reported as underpowered, with its n and interval, and no rate is quoted. No further quarter is added without a new registration.
+  - v2's confirmatory window moves to Q1 2026 (v2 PREREG, amendment 2), so that Q4 2025 can serve here.
 - **No re-running to a result.** A fetch that fails is retried once, then stands as unavailable.
 
 ## 9 · Frozen inputs
@@ -179,3 +221,7 @@ A prediction is met when the point estimate falls on its side. Not met is report
 - **"Names a competitor" and "reproduces the stated scope" are mechanical rules** (`audit/restated.py`), not readings. A person could read a span differently. Both rules are printed in the report, and every row shows the span.
 - **The name check can only confirm, or floor.** A product ChEMBL lists below its approval reads as a floor, which is ChEMBL lagging the record, not the document being wrong.
 - **2025's IPO market may yield few prospectuses.** §8's stopping rule handles a small n honestly.
+- **The fallback extractor was written after v1's code missed five issuers' filings** (amendment 1; `selection/competition_fallback.py`).
+  - It applies the same section rule, from the heading to the next heading of the same level, to the filings v1's code found nothing in, and to no others.
+  - Its finds went to the operator one by one.
+  - In v1's quarter, it would have found one filing, Abpro, which was out anyway, because its summary names no lead.

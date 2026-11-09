@@ -8,6 +8,12 @@
 3. **The reasons are verdicts-v1.2's.** `no_count_stated` is now `scope_no_count` (a scope, no number) or `no_scope_no_count` (neither). A claim that only names products is checked by name before imputation (`verify/name_match.py`), so v2 imputes only for what is still unscoped after that.
 4. **The figures quoted below are v1's as first restated** (11 of 15). They are kept as history, not updated.
 
+**Amendment 2 (operator, 2026-11-09, before any v2 run; `docs/audits/blockers.md` B-P3-12).** One change, and its reason:
+5. **The confirmatory window moves to Q1 2026 (2026-01-01 to 2026-03-31).**
+   - v1.1's amendment 1 pre-registers a contingency: if its Q1 to Q3 2025 filings yield fewer than 30 competitive claims, v1.1 adds Q4 2025. Q4 2025 may then be read before v2 runs, so it can no longer be v2's confirmatory window.
+   - If v1.1 reads Q4 2025, it joins v2's development set. If v1.1 does not read it, Q4 2025 is left unused.
+   - The compounds axis reads ChEMBL 36 throughout the new window, with the same extract and names file. ChEMBL 37 was released on 2026-05-29, by EBI's FTP listing as read on 2026-11-09.
+
 **Prerequisite, before any v2 document is opened or any v2 fetch is made:** v1's report is published. "Published" means both of these hold:
 1. `docs/audits/claims_audit_2024Q4.md`, with Finding 1 at the top, is on `main`;
 2. the operator has recorded its public URL and the date it went public in `eval/claims-audit/v2/V1_PUBLISHED.md`.
@@ -32,8 +38,11 @@ Imputation runs **after** v1's pipeline has given a row its restated verdict, an
 
 ## 3 · Sample
 
-- **Confirmatory (the headline), as amended:** v1's Source B rule (v1 PREREG §2), unchanged, applied to the window **2025-10-01 to 2025-12-31** (US Eastern). Prospectus competition sections only. The compounds axis reads ChEMBL 36 (`22ef51aa…`) and its names file (`2e53a5f9…`). *(As registered: 2025-01-01 to 2025-03-31, both sources, ChEMBL 35. Changed by amendment 1.)*
-- **Development (reported, never the headline):** v1's registered rows and, by amendment 1, v1.1's, with imputation applied to every claim still unscoped after the name check. Labelled "development set: the rules were written after reading these claims".
+- **Confirmatory (the headline), as amended:** v1's Source B rule (v1 PREREG §2), unchanged, applied to the window **2026-01-01 to 2026-03-31** (US Eastern). Prospectus competition sections only. The compounds axis reads ChEMBL 36 (`22ef51aa…`) and its names file (`2e53a5f9…`).
+  - *As registered:* 2025-01-01 to 2025-03-31, both sources, ChEMBL 35.
+  - *Amendment 1:* 2025-10-01 to 2025-12-31, prospectuses only.
+  - *Amendment 2:* 2026-01-01 to 2026-03-31.
+- **Development (reported, never the headline):** v1's registered rows and, by amendment 1, v1.1's (including Q4 2025, if v1.1 reads it, by amendment 2). Imputation is applied to every claim still unscoped after the name check. Labelled "development set: the rules were written after reading these claims".
 - **No document from the confirmatory window has been opened** at registration.
 
 ## 4 · The imputation rule (scope)
